@@ -1,58 +1,76 @@
-# 🇮🇳 Freedom Fighter Video Generator
+<div align="center">
 
-**An AI-powered Python pipeline that automatically generates cinematic 10-second documentary videos about Indian freedom fighters — from script to screen, fully automated.**
+# 🎬 AI Documentary Generator
+### *Cinematic Freedom Fighter Video Pipeline — Powered by Gemini AI*
 
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=flat-square&logo=python)](https://python.org)
-[![Gemini](https://img.shields.io/badge/Powered%20by-Gemini%202.5%20Flash-4285F4?style=flat-square&logo=google)](https://ai.google.dev)
-[![Vertex AI](https://img.shields.io/badge/Vertex%20AI-Supported-orange?style=flat-square&logo=googlecloud)](https://cloud.google.com/vertex-ai)
+<br/>
 
----
+[![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Gemini](https://img.shields.io/badge/Gemini_2.5_Flash-AI_Brain-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev)
+[![Vertex AI](https://img.shields.io/badge/Vertex_AI-Supported-FF6F00?style=for-the-badge&logo=googlecloud&logoColor=white)](https://cloud.google.com/vertex-ai)
+[![Edge TTS](https://img.shields.io/badge/Edge_TTS-Voice_Synthesis-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)](https://github.com/rany2/edge-tts)
+[![License](https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge)](LICENSE)
 
-## ✨ What It Does
+<br/>
 
-Give it a name. It builds you a video.
+> **One command. One name. A full cinematic documentary — generated entirely by AI.**
 
-The script takes an Indian freedom fighter's name and — entirely on its own — writes the script, generates AI art, synthesizes voiceover audio, adds animated subtitles, mixes in background music, and stitches it all into a polished MP4.
+<br/>
 
 ```bash
 python3 generate_video.py --fighter "Bhagat Singh"
 ```
 
-That's it. One command. Full cinematic video out.
+</div>
 
 ---
 
-## 🎬 How It Works
+## ✨ What It Does
+
+Give it the name of any Indian freedom fighter. The pipeline takes over completely:
+
+| Step | What Happens |
+|------|-------------|
+| 🧠 **Think** | Gemini 2.5 Flash writes a 3-segment cinematic script with AI image prompts |
+| 🎨 **Paint** | Pollinations AI generates 1280×720 oil-painting-style historical art |
+| 🎙️ **Speak** | Microsoft Edge TTS synthesizes a natural Indian-English voiceover |
+| 🎞️ **Animate** | Ken Burns zoom/pan effect breathes life into every still image |
+| 📝 **Subtitle** | Auto-rendered subtitles with a styled rounded overlay |
+| 🎵 **Score** | Background ambient music mixed at 15% volume beneath the voiceover |
+| 📦 **Export** | Finishes as a clean H.264 MP4 @ 24fps, ready to share |
+
+---
+
+## 🏗️ Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                  generate_video.py                       │
-│                                                          │
-│  1. ─► Gemini 2.5 Flash ──► Script + Image Prompts      │
-│         (Vertex AI / AI Studio / local fallback)         │
-│                                                          │
-│  2. ─► Pollinations AI ───► AI-generated cinematic art   │
-│                                                          │
-│  3. ─► Edge TTS ──────────► Natural Indian English voice  │
-│                                                          │
-│  4. ─► MoviePy ───────────► Ken Burns zoom/pan animation │
-│                             + subtitle overlay           │
-│                             + background music mix       │
-│                                                          │
-│  5. ─► 🎥 OUTPUT: Cinematic MP4 video (~10 seconds)     │
-└─────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                     generate_video.py                        │
+│                                                              │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │  1. SCRIPT GENERATION                               │    │
+│  │     Google Gemini 2.5 Flash                         │    │
+│  │     ├── Vertex AI  (service account — preferred)    │    │
+│  │     ├── AI Studio  (GEMINI_API_KEY — fallback)      │    │
+│  │     └── Local SCRIPTS dict  (offline — fallback)    │    │
+│  └────────────────────┬────────────────────────────────┘    │
+│                       │  3 segments: {text, image_prompt}   │
+│  ┌────────────────────▼────────────────────────────────┐    │
+│  │  2. ASSET GENERATION (per segment)                  │    │
+│  │     ├── Pollinations AI  →  PNG image  1280×720     │    │
+│  │     └── Edge TTS         →  MP3 voiceover           │    │
+│  └────────────────────┬────────────────────────────────┘    │
+│                       │                                      │
+│  ┌────────────────────▼────────────────────────────────┐    │
+│  │  3. VIDEO ASSEMBLY  (MoviePy)                       │    │
+│  │     ├── Ken Burns zoom + pan animation              │    │
+│  │     ├── Subtitle overlay  (PIL / rounded box)       │    │
+│  │     └── Background music  (15% volume mix)          │    │
+│  └────────────────────┬────────────────────────────────┘    │
+│                       │                                      │
+│              🎥  OUTPUT.mp4  (~10 seconds)                   │
+└──────────────────────────────────────────────────────────────┘
 ```
-
-### Pipeline Stages
-
-| Stage | Technology | Description |
-|-------|-----------|-------------|
-| 📝 Script | Google Gemini 2.5 Flash | Generates 3-segment narration + image prompts |
-| 🎨 Visuals | Pollinations AI | Free AI image generation at 1280×720 |
-| 🎙️ Voice | Microsoft Edge TTS | Natural `en-IN-NeerjaNeural` voice |
-| 🎞️ Effects | MoviePy + PIL | Ken Burns zoom/pan, subtitle overlays |
-| 🎵 Music | SoundHelix (configurable) | Ambient background score at 15% volume |
-| 📦 Output | FFmpeg via MoviePy | H.264 MP4, 24fps, AAC audio |
 
 ---
 
@@ -60,104 +78,113 @@ That's it. One command. Full cinematic video out.
 
 ### Prerequisites
 
-- Python 3.9 or higher
-- `ffmpeg` installed on your system
+- **Python 3.9+**
+- **FFmpeg** (required by MoviePy)
 
-**macOS:**
 ```bash
+# macOS
 brew install ffmpeg
+
+# Ubuntu / Debian
+sudo apt install ffmpeg
+
+# Windows (via Chocolatey)
+choco install ffmpeg
 ```
 
-**Ubuntu/Debian:**
-```bash
-sudo apt install ffmpeg
-```
+---
 
 ### Installation
 
 ```bash
-# Clone the repo
-git clone https://github.com/your-username/freedom-fighter-video-generator.git
-cd freedom-fighter-video-generator
+# 1. Clone the repository
+git clone https://github.com/umarcham/ai-documentary-generator.git
+cd ai-documentary-generator
 
-# Install Python dependencies
+# 2. Install Python dependencies
 pip install -r requirements.txt
 ```
 
-### Google Cloud / Vertex AI Setup
+---
 
-The script uses **Vertex AI** (via a service account) as the primary AI backend. Place your credentials file in the project root:
+### API Setup (Optional but Recommended)
 
+The pipeline has **three layers of intelligence** — it always produces output, even offline.
+
+#### 🥇 Option A — Vertex AI (Best Quality)
+
+1. Create a Google Cloud service account with `Vertex AI User` role
+2. Download the JSON key
+3. Place it in the project root as `GOOGLE_APPLICATION_CREDENTIALS.json`
+
+> ⚠️ **The credentials file is listed in `.gitignore` and will never be committed.**
+
+#### 🥈 Option B — Google AI Studio API Key
+
+```bash
+export GEMINI_API_KEY="your-api-key-here"
 ```
-freedom-fighter-video-generator/
-├── generate_video.py
-├── GOOGLE_APPLICATION_CREDENTIALS.json   ← place it here
-└── requirements.txt
-```
 
-> ⚠️ **Never commit your credentials file.** It is already listed in `.gitignore`.
+Get a free key at [aistudio.google.com](https://aistudio.google.com).
 
-If no credentials are found, the script automatically falls back to:
-1. A `GEMINI_API_KEY` environment variable (Google AI Studio)
-2. Pre-written local scripts (no internet needed)
+#### 🥉 Option C — Offline (No setup needed)
+
+Four fighters are built-in and work with zero credentials:
+`Subhas Chandra Bose` · `Bhagat Singh` · `Mahatma Gandhi` · `Rani Lakshmibai`
 
 ---
 
 ## 🎯 Usage
 
-### Basic
+### Quickstart
 
 ```bash
-# Default: Subhas Chandra Bose
+# Default (Subhas Chandra Bose)
 python3 generate_video.py
 
-# Pick a fighter
+# Generate for any fighter
 python3 generate_video.py --fighter "Bhagat Singh"
 python3 generate_video.py --fighter "Mahatma Gandhi"
 python3 generate_video.py --fighter "Rani Lakshmibai"
+python3 generate_video.py --fighter "Sarojini Naidu"   # dynamic via Gemini
 ```
 
-### All Options
+### Full Options Reference
 
 ```bash
 python3 generate_video.py \
-  --fighter "Bhagat Singh" \
-  --output bhagat_singh.mp4 \
-  --voice en-IN-NeerjaNeural \
-  --music-url https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3 \
-  --no-music \
-  --api-key YOUR_GEMINI_API_KEY \
-  --creds /path/to/credentials.json
+  --fighter    "Bhagat Singh"              \
+  --output     bhagat_singh.mp4            \
+  --voice      en-IN-NeerjaNeural          \
+  --music-url  https://example.com/bg.mp3  \
+  --no-music                               \
+  --api-key    YOUR_GEMINI_API_KEY         \
+  --creds      /path/to/credentials.json
 ```
 
-| Argument | Default | Description |
-|----------|---------|-------------|
+| Flag | Default | Description |
+|------|---------|-------------|
 | `--fighter` | `Subhas Chandra Bose` | Name of the Indian freedom fighter |
-| `--output` | `freedom_fighter.mp4` | Output video filename |
-| `--voice` | `en-IN-NeerjaNeural` | Edge TTS voice to use |
-| `--music-url` | SoundHelix MP3 | URL for background music |
-| `--no-music` | `False` | Disable background music |
-| `--api-key` | env var / auto | Gemini AI Studio API key |
-| `--creds` | auto-detect | Path to Google credentials JSON |
-
-### Using an Environment Variable
-
-```bash
-export GEMINI_API_KEY="your-key-here"
-python3 generate_video.py --fighter "Rani Lakshmibai"
-```
+| `--output` | `freedom_fighter.mp4` | Output MP4 filename |
+| `--voice` | `en-IN-NeerjaNeural` | Microsoft Edge TTS voice ID |
+| `--music-url` | SoundHelix Song 1 | URL to download background music from |
+| `--no-music` | `False` | Skip background music entirely |
+| `--api-key` | env `GEMINI_API_KEY` | Google AI Studio API key |
+| `--creds` | auto-detected | Path to Google service account JSON |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-freedom-fighter-video-generator/
-├── generate_video.py          # Main pipeline script
-├── requirements.txt           # Python dependencies
-├── .gitignore                 # Ignores credentials, outputs, temp files
-├── README.md                  # You are here
-└── temp_assets/               # Auto-created during generation (gitignored)
+ai-documentary-generator/
+│
+├── generate_video.py       ← 🧠 Main pipeline — all logic lives here
+├── requirements.txt        ← 📦 Python dependencies
+├── .gitignore              ← 🔒 Excludes credentials, outputs & temp files
+├── README.md               ← 📖 You are here
+│
+└── temp_assets/            ← ⚡ Auto-created at runtime (gitignored)
     ├── image_1.png
     ├── image_2.png
     ├── image_3.png
@@ -169,64 +196,85 @@ freedom-fighter-video-generator/
 
 ---
 
-## 🧠 AI Integration Details
-
-### Gemini API Priority Chain
+## 🧠 AI Priority Chain
 
 ```
-GOOGLE_APPLICATION_CREDENTIALS.json  (Vertex AI — preferred)
-        ↓ if not found / fails
-GEMINI_API_KEY env var               (Google AI Studio fallback)
-        ↓ if not set / fails
-Local pre-written scripts            (offline fallback)
+GOOGLE_APPLICATION_CREDENTIALS.json   ──►  Vertex AI Gemini 2.5 Flash
+          ↓ (not found or fails)
+    GEMINI_API_KEY env variable        ──►  Google AI Studio Gemini 2.5 Flash
+          ↓ (not set or fails)
+    Local pre-written SCRIPTS dict     ──►  Offline, no internet required
 ```
 
-### Built-in Freedom Fighters (Offline Mode)
-
-These fighters work without any API credentials:
-
-- **Subhas Chandra Bose** ← default
-- **Bhagat Singh**
-- **Mahatma Gandhi**
-- **Rani Lakshmibai**
-
-With API credentials, Gemini generates fully customized content for **any** freedom fighter.
+The script **never crashes due to missing credentials** — it gracefully steps down the chain.
 
 ---
 
 ## 📦 Dependencies
 
 ```
-requests       — HTTP calls to image and music APIs
-moviepy>=2.0   — Video assembly, audio mixing, clip effects
-edge-tts       — Microsoft Edge Text-to-Speech synthesis
-pillow         — Image processing and subtitle rendering
-numpy          — Frame array manipulation
-google-auth    — Vertex AI service account credential loading
+requests        HTTP calls to image, music, and Gemini REST APIs
+moviepy>=2.0    Video assembly, clip concatenation, audio mixing
+edge-tts        Microsoft Edge Text-to-Speech (async)
+pillow          Image processing, subtitle rendering, Ken Burns frames
+numpy           Frame array manipulation between PIL and MoviePy
+google-auth     Loads Vertex AI service account credentials
+```
+
+Install all at once:
+
+```bash
+pip install -r requirements.txt
 ```
 
 ---
 
-## ⚙️ Troubleshooting
+## 🛠️ Troubleshooting
 
-| Problem | Fix |
+| Symptom | Fix |
 |---------|-----|
-| `edge-tts` not found | `pip install edge-tts` |
-| `ffmpeg` not found | `brew install ffmpeg` (macOS) / `sudo apt install ffmpeg` (Linux) |
-| Image download fails | Pollinations AI retries 4× automatically; check your internet connection |
-| Vertex AI 429 error | Quota exhausted; script auto-falls back to local scripts |
+| `ffmpeg not found` | `brew install ffmpeg` · `sudo apt install ffmpeg` |
+| `edge-tts` import error | `pip install edge-tts` |
+| Image download fails | Pollinations AI retries 4× automatically — check internet |
+| Vertex AI 429 (quota) | Script auto-falls back to AI Studio or local scripts |
+| Video has no audio | Confirm `ffmpeg` is installed and accessible in `$PATH` |
+| Blank/corrupt image | Re-run — Pollinations occasionally returns empty responses |
 
 ---
 
-## 🤝 Assignment Context
+## 🗺️ Roadmap
 
-This project was built as a Junior AI Developer assignment. It demonstrates:
-
-- Practical integration of **Generative AI APIs** (Gemini via Vertex AI and AI Studio)
-- **Automated multimedia pipeline** design (script → image → audio → video)
-- Clean, human-readable Python with graceful fallbacks
-- Real-world multi-service AI coordination
+- [ ] 🌐 Support for more regional languages via Edge TTS voices
+- [ ] 🖼️ Add crossfade transitions between segments
+- [ ] ☁️ One-click Google Cloud Run deployment
+- [ ] 🎭 Multi-fighter compilation videos (e.g. Top 5 Freedom Fighters)
+- [ ] 📱 Vertical 9:16 format for Reels / Shorts output
 
 ---
 
-*Made with ❤️ — AI-Powered Documentary Generator*
+## 🤝 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+```bash
+# Fork → Clone → Branch → Commit → PR
+git checkout -b feature/your-feature-name
+git commit -m "feat: describe your change"
+git push origin feature/your-feature-name
+```
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
+
+---
+
+<div align="center">
+
+**Built with ❤️ using Google Gemini · Pollinations AI · Microsoft Edge TTS · MoviePy**
+
+*Honoring the heroes who gave everything for freedom.*
+
+</div>
