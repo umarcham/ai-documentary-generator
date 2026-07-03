@@ -220,7 +220,7 @@ google-auth    — Vertex AI service account credential loading
 
 ## 🤝 Assignment Context
 
-This project was built as part of the **Sabr Intelligence Junior AI Developer Assignment**. It demonstrates:
+This project was built as a Junior AI Developer assignment. It demonstrates:
 
 - Practical integration of **Generative AI APIs** (Gemini via Vertex AI and AI Studio)
 - **Automated multimedia pipeline** design (script → image → audio → video)
@@ -229,4 +229,4 @@ This project was built as part of the **Sabr Intelligence Junior AI Developer As
 
 ---
 
-*Made with ❤️ for the Sabr Intelligence Assignment*
+*Made with ❤️ — AI-Powered Documentary Generator*
