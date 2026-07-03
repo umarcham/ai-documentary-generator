@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+*.egg-info/
+dist/
+build/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Sensitive credentials - NEVER commit
+GOOGLE_APPLICATION_CREDENTIALS.json
+*.json
+!example_credentials.json
+
+# Generated output files
+*.mp4
+*.mp3
+*.wav
+
+# Temporary assets generated during video creation
+temp_assets/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
